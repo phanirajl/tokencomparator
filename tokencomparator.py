@@ -1,6 +1,6 @@
 # tokencamparator.py
 
-# list1 are values you want to check, create an object first: suspects = Members.memberfile('./member'). This takes a file with tokens separated by a new line.
+# list1 are values you want to check, create an object first: suspects = Members.member_file('./member'). This takes a file with tokens separated by a new line.
 # list2 are ranges against which you want to check, create an object first: checkagainst = Keyspaceranges.keyspace_stdout('./listofranges'). This takes in a raw output from nodetool describering <keyspace>.
 # Call the worker function check(list1, list2), e.g. check(suspect, checkagainst)
 
@@ -25,7 +25,7 @@ def end(token1, token2):
         end_token = token2
     return (end_token)
 
-class Rangeslice(object):
+class RangeSlice(object):
     def __init__(self, token1, token2):
         self.token1 = token1
         self.token2 = token2
@@ -33,7 +33,7 @@ class Rangeslice(object):
     def __repr__(self):
         return 'Rangeslice({!r},{!r})'.format(self.token1, self.token2)
 
-class Keyspaceranges(object):
+class KeyspaceRanges(object):
     def __init__(self):
         self.slices = []
 
@@ -50,7 +50,7 @@ class Keyspaceranges(object):
                 rowlist = row.split(',')
                 start = rowlist[0].split(':')
                 end = rowlist[1].split(':')
-                h = Rangeslice(int(start[1]), int(end[1]))
+                h = RangeSlice(int(start[1]), int(end[1]))
                 self.slices.append(h)
             return self
 
@@ -75,7 +75,7 @@ class Members(object):
         return getattr(self.members, name)
 
     @classmethod
-    def memberfile(cls, filename):
+    def member_file(cls, filename):
         self = cls()
         with open(filename, 'r') as f:
             for row in f:
