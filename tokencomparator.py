@@ -1,14 +1,14 @@
 # tokencamparator.py
 
 # list1 are values you want to check, create an object first: suspects = Members.member_file('./member'). This takes a file with tokens separated by a new line.
-# list2 are ranges against which you want to check, create an object first: checkagainst = Keyspaceranges.keyspace_stdout('./listofranges'). This takes in a raw output from nodetool describering <keyspace>.
+# list2 are ranges against which you want to check, create an object first: checkagainst = KeyspaceRanges.keyspace_stdout('./listofranges'). This takes in a raw output from nodetool describering <keyspace>.
 # Call the worker function check(list1, list2), e.g. check(suspect, checkagainst)
 
 def check(list1, list2):
     for suspect in list1:
         print('Suspect token {}'.format(suspect.membertoken))
         for suspectrange in list2:
-            if suspect.membertoken >= start(suspectrange.token1, suspectrange.token2) and suspect.membertoken <= end(suspectrange.token1,suspectrange.token2):
+            if start(suspectrange.token1, suspectrange.token2) <= suspect.membertoken <= end(suspectrange.token1,suspectrange.token2):
                 print('Token {} belongs between {} and {}'.format(suspect.membertoken,  suspectrange.token1, suspectrange.token2))
 
 def start(token1, token2):
