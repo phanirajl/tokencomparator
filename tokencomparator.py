@@ -1,7 +1,17 @@
 # tokencamparator.py
 
-# list1 are values you want to check, create an object first: suspects = Members.member_file('./member'). This takes a file with tokens separated by a new line.
-# list2 are ranges against which you want to check, create an object first: checkagainst = KeyspaceRanges.keyspace_stdout('./listofranges'). This takes in a raw output from nodetool describering <keyspace>.
+# This program checks whether a Cassandra 
+# token is within a specific range: 
+# start-of-range <= token-of-interest <=  end-of-range
+
+# list1 are values you want to check,
+# create an object first: suspects = Members.member_file('./member'). 
+# This takes a file with tokens indented by a new line.
+
+# list2 are ranges against which you want to check, create an object first: 
+# checkagainst = KeyspaceRanges.keyspace_stdout('./listofranges'). 
+# This takes in a raw output from nodetool describering <keyspace>.
+
 # Call the worker function check(list1, list2), e.g. check(suspect, checkagainst)
 
 def check(list1, list2):
